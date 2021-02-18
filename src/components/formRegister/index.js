@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { registerAction, updateAction, separeteEmployeeEditAction, registerEditAction } from '../../redux/actions'
+import { registerAction, updateAction, separeteEmployeeEditAction, registerEditAction } from '../../redux/actions';
+import './index.css';
 
 class Form extends Component {
   constructor(props){
@@ -80,59 +81,63 @@ class Form extends Component {
     const { edit } = this.props
     const { nome, cpf, salario, desconto, dependentes } = this.state;
     return (
-      <form>
-        <label htmlFor="nome">
-          NOME:
-          <input
-            type="text"
-            name="nome"
-            value={ nome }
-            onChange={ ({ target }) => this.setState({nome: target.value})}
-          />
-        </label>
-        <label htmlFor="CPF">
-          CPF:
-          <input
-            type="number"
-            name="CPF"
-            value={ cpf }
-            onChange={ ({ target }) => this.setState({cpf: target.value})}
-          />
-        </label>
-        <label>
-          SALÁRIO BRUTO:
-          <input 
-            type="number"
-            name="salario"
-            value={ salario }
-            onChange={ ({ target }) => this.setState({salario: target.value})}
-          />
-        </label>
-        <label>
-          DESCONTO DA PREVIDÊNCIA:
-          <input 
-            type="number"
-            name="desconto"
-            value={ desconto }
-            onChange={ ({ target }) => this.setState({desconto: target.value})}
-          />
-        </label>
-        <label>
-          NÚMERO DE DEPENDENTES:
-          <input 
-            type="number"
-            name="dependentes"
-            value={ dependentes }
-            onChange={ ({ target }) => this.setState({dependentes: target.value})}
-          />
-        </label>
-        <Link
-          to="/funcionarios"
-          onClick={!edit ? this.submitState : this.updateStatus }
-        >
-         {!edit ? 'Cadastrar Funcionário' : 'Atualizar Funcionário' }
-        </Link>
-      </form>
+      <div className="form__wrapper">
+        <form className="form__container">
+          <label htmlFor="nome">
+            NOME:
+            <input
+              type="text"
+              name="nome"
+              value={ nome }
+              onChange={ ({ target }) => this.setState({nome: target.value})}
+            />
+          </label>
+          <label htmlFor="CPF">
+            CPF:
+            <input
+              type="number"
+              name="CPF"
+              value={ cpf }
+              onChange={ ({ target }) => this.setState({cpf: target.value})}
+            />
+          </label>
+          <label>
+            SALÁRIO BRUTO:
+            <input 
+              type="number"
+              name="salario"
+              value={ salario }
+              onChange={ ({ target }) => this.setState({salario: target.value})}
+            />
+          </label>
+          <label>
+            DESCONTO DA PREVIDÊNCIA:
+            <input 
+              type="number"
+              name="desconto"
+              value={ desconto }
+              onChange={ ({ target }) => this.setState({desconto: target.value})}
+            />
+          </label>
+          <label>
+            NÚMERO DE DEPENDENTES:
+            <input 
+              type="number"
+              name="dependentes"
+              value={ dependentes }
+              onChange={ ({ target }) => this.setState({dependentes: target.value})}
+            />
+          </label>
+          <Link
+            to="/funcionarios"
+            onClick={!edit ? this.submitState : this.updateStatus }
+          >
+            <button>
+              {!edit ? 'Cadastrar Funcionário' : 'Atualizar Funcionário' }
+            </button>
+          </Link>
+        </form>
+      </div>
     )
   }
 }
