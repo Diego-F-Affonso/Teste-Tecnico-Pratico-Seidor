@@ -1,0 +1,18 @@
+.information__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10%;
+  margin-top: 2%;
+  padding: 25px;
+  width: 80%;
+}
+
+.information__wrapper h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.information__wrapper p {
+  margin-bottom: 20px;
+}
