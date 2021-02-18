@@ -15,7 +15,8 @@ class Form extends Component {
       discount: 0,
       dependents: 0,
       edit: edit,
-      id: 0
+      id: 0,
+      isDisable: true, 
     }
 
     this.updateStatus = this.updateStatus.bind(this);
@@ -31,20 +32,26 @@ class Form extends Component {
       dependents: 0,
     });
   };
-  // set os valores do funcionario que está sendo atualizado nos input
+
   componentDidUpdate(prevProps, prevState) {
     const separeteEmployee = this.props.employeeEdit;
-    const { name, cpf, salary, discount, dependents, id } = separeteEmployee[0];
+    // set os valores do funcionario que está sendo atualizado nos input
     if (separeteEmployee.length !== 0 && prevProps.edit !== false && prevState.edit === true) {
       this.setState({
-        name: name,
-        cpf: cpf,
-        salary: salary,
-        discount: discount,
-        dependents: dependents,
+        name: separeteEmployee[0].name,
+        cpf: separeteEmployee[0].cpf,
+        salary: separeteEmployee[0].salary,
+        discount: separeteEmployee[0].discount,
+        dependents: separeteEmployee[0].dependents,
         edit: false,
-        id: id
+        id: separeteEmployee[0].id
       })
+    }
+    // habilita o botão se for digitado algo no input name
+    if (this.state.name.length !== prevState.name.length) {
+      console.log(this.state.name.length)
+      console.log(prevState.name.length)
+      this.setState({isDisable: false})
     }
   };
   // adiciona um funcionario
@@ -84,7 +91,7 @@ class Form extends Component {
 
   render() {
     const { edit } = this.props;
-    const { name, cpf, salary, discount, dependents } = this.state;
+    const { name, cpf, salary, discount, dependents, isDisable } = this.state;
     return (
       <div className="form__wrapper">
         <form className="form__container">
@@ -94,6 +101,7 @@ class Form extends Component {
               type="text"
               name="name"
               value={ name }
+              required="required"
               onChange={ ({ target }) => this.setState({name: target.value})}
             />
           </label>
@@ -103,6 +111,7 @@ class Form extends Component {
               type="number"
               name="cpf"
               value={ cpf }
+              required="required"
               onChange={ ({ target }) => this.setState({cpf: target.value})}
             />
           </label>
@@ -137,7 +146,9 @@ class Form extends Component {
             to="/funcionarios"
             onClick={!edit ? this.submitState : this.updateStatus }
           >
-            <button>
+            <button
+              disabled={ isDisable }
+            >
               {!edit ? 'Cadastrar Funcionário' : 'Atualizar Funcionário' }
             </button>
           </Link>
