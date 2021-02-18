@@ -3,9 +3,10 @@
   background: rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   justify-content: center;
   width: 100%;
+  margin-top: 8%;
 }
 
 .form__container {
