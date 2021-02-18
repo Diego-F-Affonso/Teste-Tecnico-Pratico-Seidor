@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Header from '../../components/header/index';
+import EmployeeList from '../../components/employeeList';
+import TableInformation from '../../components/tableInformation'
 
 class Funcionarios extends Component {
   render() {
-    // const { employee } = this.props
-    // console.log(employee)
     return (
       <div>
         <Header />
-        <p>Funcionarios</p>
+        <TableInformation />
+        <EmployeeList />
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => ({
-  employee: state.funcionariosReducer
-});
-
-export default connect(mapStateToProps)(Funcionarios);
+export default Funcionarios;

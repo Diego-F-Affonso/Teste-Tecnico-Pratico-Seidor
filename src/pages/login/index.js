@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      redirect: false,
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -14,11 +12,10 @@ class Login extends Component {
 
   handleSubmit() {
     const { history } = this.props;
-    history.push('funcionarios')
+    history.push('registrar-funcionario')
   }
 
   render() {
-    const { redirect } = this.state;
     return (
       <form>
         <label htmlFor="email">
@@ -41,7 +38,7 @@ class Login extends Component {
         </label>
         <button
           type="button"
-          onClick={ (e) => this.handleSubmit(e) }
+          onClick={ () => this.handleSubmit() }
         >
           LOGIN
         </button>

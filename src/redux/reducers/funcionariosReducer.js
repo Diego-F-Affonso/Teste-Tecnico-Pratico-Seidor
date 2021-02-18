@@ -13,16 +13,16 @@ function funcionariosReducer(state = INITIAL_STATE , action) {
         employees: [...state.employees, action.payload] };
     case DELETE_EMPLOYEE:
       return { ...state,
-        employees: [...state.employees.filter((employee) => (employee.cpf !== action.payload))] };
+        employees: [...state.employees.filter((employee) => (employee.id !== action.payload))] };
     case UPDATE_EMPLOYEE:
       return { ...state,
         edit: action.payload };
     case EMPLOYEE_EDIT:
       return { ...state,
-        employeeEdit: [...state.employees.filter((employee) => (employee.cpf === action.payload))]}
+        employeeEdit: [...state.employees.filter((employee) => (employee.id === action.payload))]}
     case REGISTER_EDIT:
       return { ...state, 
-        employees: [...state.employees.filter((employee) => (employee.cpf !== action.payload.cpf)), action.payload]}
+        employees: [...state.employees.filter((employee) => (employee.id !== action.payload.id)), action.payload]}
     default:
       return state;
   }

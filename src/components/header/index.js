@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import './index.css';
 
 class Header extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     email: ''
-  //   }
-  // }
-
   render() {
     return (
       <header>
-        <a
-          href="/registrar-funcionario"
+        <Link
+          to="/registrar-funcionario"
           type="button"
         >
           <p>Registrar Funcionário</p>
-        </a>
-        <a
-          href="/funcionarios"
+        </Link>
+        <Link
+          to="/funcionarios"
           type="button"
         >
           <p>Funcionarios</p>
-        </a>
+        </Link>
       </header>
     )
   }

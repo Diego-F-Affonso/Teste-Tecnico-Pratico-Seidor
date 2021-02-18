@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { deleteAction, updateAction, separeteEmployeeEditAction } from '../../redux/actions'
 
 class EmployeeList extends Component {
@@ -22,13 +23,13 @@ class EmployeeList extends Component {
     deleteEmployee(name);
   }
 
-  updateStatus(cpf) {
+  updateStatus(id) {
     const {
       updateAction: changeEdit,
       separeteEmployeeEditAction: separeteEmployee,
     } = this.props;
     changeEdit(true)
-    separeteEmployee(cpf)
+    separeteEmployee(id)
   }
 
   render() {
@@ -52,25 +53,28 @@ class EmployeeList extends Component {
            salario,
            desconto,
            dependentes,
-         }, index) => {
+           id,
+         }) => {
           const deduçãoDependente = 164.56;
            if (salario <= 1903.98) {
-            return <tr key={ index }>
+            return <tr key={ id }>
               <td>{ nome }</td>
               <td>{ cpf }</td>
               <td>{ salario }</td>
               <td>{ desconto }</td>
               <td>{ dependentes }</td>
               <td>ISENTO</td>
-              <button
-                type="button"
-                onClick={ () => this.updateStatus(cpf) }
+              <Link
+                to="/registrar-funcionario"
+                onClick={ () => this.updateStatus(id) }
               >
-                EDITAR
-              </button>
+                <button>
+                  EDITAR
+                </button>
+              </Link>
               <button
                 type="button"
-                onClick={ () => this.removeEmployee(cpf) }
+                onClick={ () => this.removeEmployee(id) }
               >
                 EXCLUIR
               </button>
@@ -80,17 +84,24 @@ class EmployeeList extends Component {
             const descontoDependentes = deduçãoDependente * dependentes;
             const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
             const descontoIRRF = (salarioBase * 0.075) - 142.80
-            return <tr key={ index }>
+            return <tr key={ id }>
               <td>{ nome }</td>
               <td>{ cpf }</td>
               <td>{ salario }</td>
               <td>{ desconto }</td>
               <td>{ dependentes }</td>
               <td>{ descontoIRRF.toFixed(2) }</td>
-              <button>EDITAR</button>
+              <Link
+                to="/registrar-funcionario"
+                onClick={ () => this.updateStatus(id) }
+              >
+                <button>
+                  EDITAR
+                </button>
+              </Link>
               <button
                 type="button"
-                onClick={ () => this.removeEmployee(cpf) }
+                onClick={ () => this.removeEmployee(id) }
               >
                 EXCLUIR
               </button>
@@ -100,17 +111,24 @@ class EmployeeList extends Component {
             const descontoDependentes = deduçãoDependente * dependentes;
             const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
             const descontoIRRF = parseFloat((salarioBase * 0.15)) - 354.80
-            return <tr key={ index }>
+            return <tr key={ id }>
               <td>{ nome }</td>
               <td>{ cpf }</td>
               <td>{ salario }</td>
               <td>{ desconto }</td>
               <td>{ dependentes }</td>
               <td>{ descontoIRRF.toFixed(2) }</td>
-              <button>EDITAR</button>
+              <Link
+                to="/registrar-funcionario"
+                onClick={ () => this.updateStatus(id) }
+              >
+                <button>
+                  EDITAR
+                </button>
+              </Link>
               <button
                 type="button"
-                onClick={ () => this.removeEmployee(cpf) }
+                onClick={ () => this.removeEmployee(id) }
               >
                 EXCLUIR
               </button>
@@ -120,17 +138,24 @@ class EmployeeList extends Component {
             const descontoDependentes = deduçãoDependente * dependentes;
             const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
             const descontoIRRF = parseFloat((salarioBase * 0.225)) - 636.13
-            return <tr key={ index }>
+            return <tr key={ id }>
               <td>{ nome }</td>
               <td>{ cpf }</td>
               <td>{ salario }</td>
               <td>{ desconto }</td>
               <td>{ dependentes }</td>
               <td>{ descontoIRRF.toFixed(2) }</td>
-              <button>EDITAR</button>
+              <Link
+                to="/registrar-funcionario"
+                onClick={ () => this.updateStatus(id) }
+              >
+                <button>
+                  EDITAR
+                </button>
+              </Link>
               <button
                 type="button"
-                onClick={ () => this.removeEmployee(cpf) }
+                onClick={ () => this.removeEmployee(id) }
               >
                 EXCLUIR
               </button>
@@ -139,17 +164,24 @@ class EmployeeList extends Component {
             const descontoDependentes = deduçãoDependente * dependentes;
             const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
             const descontoIRRF = parseFloat((salarioBase * 0.275)) - 869.36
-            return <tr key={ index }>
+            return <tr key={ id }>
               <td>{ nome }</td>
               <td>{ cpf }</td>
               <td>{ salario }</td>
               <td>{ desconto }</td>
               <td>{ dependentes }</td>
               <td>{ descontoIRRF.toFixed(2) }</td>
-              <button>EDITAR</button>
+              <Link
+                to="/registrar-funcionario"
+                onClick={ () => this.updateStatus(id) }
+              >
+                <button>
+                  EDITAR
+                </button>
+              </Link>
               <button
                 type="button"
-                onClick={ () => this.removeEmployee(cpf) }
+                onClick={ () => this.removeEmployee(id) }
               >
                 EXCLUIR
               </button>
@@ -172,26 +204,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeList);
-
-
-// <tbody>
-//          { employees.map(({
-//            nome,
-//            cpf,
-//            salario,
-//            desconto,
-//            dependentes,
-//            irrf,
-//          }, index) => (
-//            <tr key={ index }>
-//              <td>{ nome }</td>
-//              <td>{ cpf }</td>
-//              <td>{ salario }</td>
-//              <td>{ desconto }</td>
-//              <td>{ dependentes }</td>
-//              <td>{ irrf }</td>
-//              <button>EDITAR</button>
-//              <button>EXCLUIR</button>
-//            </tr>
-//          )) }
-//        </tbody>

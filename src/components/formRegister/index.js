@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { registerAction, updateAction, separeteEmployeeEditAction, registerEditAction } from '../../redux/actions'
 
 class Form extends Component {
@@ -12,51 +13,14 @@ class Form extends Component {
       salario: 0,
       desconto: 0,
       dependentes: 0,
-      irrf: 0,
-      test: edit
+      edit: edit,
+      id: 0
     }
 
     this.updateStatus = this.updateStatus.bind(this);
     this.submitState = this.submitState.bind(this);
   }
-  
-  componentDidUpdate(prevProps, prevState) {
-    const separeteEmployee = this.props.employeeEdit
-    if (separeteEmployee.length !== 0 && prevProps.edit === false && this.props.edit === true) {
-      this.setState({
-        nome: separeteEmployee[0].nome,
-        cpf: separeteEmployee[0].cpf,
-        salario: separeteEmployee[0].salario,
-        desconto: separeteEmployee[0].desconto,
-        dependentes: separeteEmployee[0].dependentes,
-      })
-    }
-  }
-
-  submitState() {
-    const { salario, desconto, dependentes, nome, cpf, irrf } = this.state;
-    const { registerAction: addEmployee } = this.props
-    const employee = {
-      nome,
-      cpf,
-      salario,
-      desconto,
-      dependentes,
-      irrf,
-    };
-    addEmployee(employee);
-    this.setState({
-      nome: '',
-      cpf: 0,
-      salario: 0,
-      desconto: 0,
-      dependentes: 0,
-    })
-  }
-
-  updateStatus() {
-    const { updateAction: changeEdit, separeteEmployeeEditAction: separeteEmployee, registerEditAction: addEditEmployee } = this.props;
-    changeEdit(false);
+  componentDidMount() {
     this.setState({
       nome: '',
       cpf: 0,
@@ -64,15 +28,50 @@ class Form extends Component {
       desconto: 0,
       dependentes: 0,
     });
-    separeteEmployee([])
-    const { salario, desconto, dependentes, nome, cpf, irrf } = this.state;
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    const separeteEmployee = this.props.employeeEdit
+    if (separeteEmployee.length !== 0 && prevProps.edit !== false && prevState.edit === true) {
+      this.setState({
+        nome: separeteEmployee[0].nome,
+        cpf: separeteEmployee[0].cpf,
+        salario: separeteEmployee[0].salario,
+        desconto: separeteEmployee[0].desconto,
+        dependentes: separeteEmployee[0].dependentes,
+        edit: false,
+        id: separeteEmployee[0].id
+      })
+    }
+  }
+
+  submitState() {
+    const { salario, desconto, dependentes, nome, cpf } = this.state;
+    const { registerAction: addEmployee, employeesLength } = this.props
+    console.log(employeesLength.length)
     const employee = {
       nome,
       cpf,
       salario,
       desconto,
       dependentes,
-      irrf,
+      id: employeesLength.length,
+    };
+    addEmployee(employee);
+  }
+
+  updateStatus() {
+    const { updateAction: changeEdit, separeteEmployeeEditAction: separeteEmployee, registerEditAction: addEditEmployee } = this.props;
+    changeEdit(false);
+    separeteEmployee([])
+    const { salario, desconto, dependentes, nome, cpf, id } = this.state;
+    const employee = {
+      nome,
+      cpf,
+      salario,
+      desconto,
+      dependentes,
+      id,
     };
     addEditEmployee(employee)
   }
@@ -127,12 +126,12 @@ class Form extends Component {
             onChange={ ({ target }) => this.setState({dependentes: target.value})}
           />
         </label>
-        <button
-          type="button"
+        <Link
+          to="/funcionarios"
           onClick={!edit ? this.submitState : this.updateStatus }
         >
          {!edit ? 'Cadastrar Funcionário' : 'Atualizar Funcionário' }
-        </button>
+        </Link>
       </form>
     )
   }
@@ -147,7 +146,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   edit: state.funcionariosReducer.edit,
-  employeeEdit: state.funcionariosReducer.employeeEdit
+  employeeEdit: state.funcionariosReducer.employeeEdit,
+  employeesLength: state.funcionariosReducer.employees
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
