@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import logo from '../../images/logoSeidor.png';
 import './index.css';
 
@@ -9,6 +10,7 @@ class Login extends Component {
       email: '',
       password: '',
       isDisable: true,
+      redirect: false,
     }
 
     this.validateEmail = this.validateEmail.bind(this);
@@ -17,8 +19,7 @@ class Login extends Component {
   }
 
   handleSubmit() {
-    const { history } = this.props;
-    history.push('registrar-funcionario')
+    this.setState({redirect: true})
   }
 
   // setState
@@ -48,7 +49,7 @@ class Login extends Component {
   }
 
   render() {
-    const { email, isDisable } = this.state;
+    const { email, isDisable, redirect } = this.state;
     return (
       <main className="login__wrapper">
         <form className="login__container">
@@ -83,6 +84,7 @@ class Login extends Component {
           >
             LOGIN
           </button>
+          { redirect && <Redirect to="/registrar-funcionario"/>}
         </form>
       </main>
     )
