@@ -9,11 +9,11 @@ class Form extends Component {
     super(props);
     const { edit } = this.props 
     this.state = {
-      nome: '',
+      name: '',
       cpf: 0,
-      salario: 0,
-      desconto: 0,
-      dependentes: 0,
+      salary: 0,
+      discount: 0,
+      dependents: 0,
       edit: edit,
       id: 0
     }
@@ -21,111 +21,116 @@ class Form extends Component {
     this.updateStatus = this.updateStatus.bind(this);
     this.submitState = this.submitState.bind(this);
   }
+  // limpa os input
   componentDidMount() {
     this.setState({
-      nome: '',
+      name: '',
       cpf: 0,
-      salario: 0,
-      desconto: 0,
-      dependentes: 0,
+      salary: 0,
+      discount: 0,
+      dependents: 0,
     });
-  }
-  
+  };
+  // set os valores do funcionario que está sendo atualizado nos input
   componentDidUpdate(prevProps, prevState) {
-    const separeteEmployee = this.props.employeeEdit
+    const separeteEmployee = this.props.employeeEdit;
+    const { name, cpf, salary, discount, dependents, id } = separeteEmployee[0];
     if (separeteEmployee.length !== 0 && prevProps.edit !== false && prevState.edit === true) {
       this.setState({
-        nome: separeteEmployee[0].nome,
-        cpf: separeteEmployee[0].cpf,
-        salario: separeteEmployee[0].salario,
-        desconto: separeteEmployee[0].desconto,
-        dependentes: separeteEmployee[0].dependentes,
+        name: name,
+        cpf: cpf,
+        salary: salary,
+        discount: discount,
+        dependents: dependents,
         edit: false,
-        id: separeteEmployee[0].id
+        id: id
       })
     }
-  }
-
+  };
+  // adiciona um funcionario
   submitState() {
-    const { salario, desconto, dependentes, nome, cpf } = this.state;
-    const { registerAction: addEmployee, employeesLength } = this.props
-    console.log(employeesLength.length)
+    const { salary, discount, dependents, name, cpf } = this.state;
+    const { registerAction: addEmployee, employeesLength } = this.props;
     const employee = {
-      nome,
+      name,
       cpf,
-      salario,
-      desconto,
-      dependentes,
+      salary,
+      discount,
+      dependents,
       id: employeesLength.length,
     };
     addEmployee(employee);
   }
-
+  // atualiza os dados do funcionario selecionado
   updateStatus() {
-    const { updateAction: changeEdit, separeteEmployeeEditAction: separeteEmployee, registerEditAction: addEditEmployee } = this.props;
+    const {
+      updateAction: changeEdit,
+      separeteEmployeeEditAction: separeteEmployee,
+      registerEditAction: addEditEmployee
+    } = this.props;
     changeEdit(false);
-    separeteEmployee([])
-    const { salario, desconto, dependentes, nome, cpf, id } = this.state;
+    separeteEmployee([]);
+    const { salary, discount, dependents, name, cpf, id } = this.state;
     const employee = {
-      nome,
+      name,
       cpf,
-      salario,
-      desconto,
-      dependentes,
+      salary,
+      discount,
+      dependents,
       id,
     };
     addEditEmployee(employee)
-  }
+  };
 
   render() {
-    const { edit } = this.props
-    const { nome, cpf, salario, desconto, dependentes } = this.state;
+    const { edit } = this.props;
+    const { name, cpf, salary, discount, dependents } = this.state;
     return (
       <div className="form__wrapper">
         <form className="form__container">
-          <label htmlFor="nome">
+          <label htmlFor="name">
             NOME:
             <input
               type="text"
-              name="nome"
-              value={ nome }
-              onChange={ ({ target }) => this.setState({nome: target.value})}
+              name="name"
+              value={ name }
+              onChange={ ({ target }) => this.setState({name: target.value})}
             />
           </label>
-          <label htmlFor="CPF">
+          <label htmlFor="cpf">
             CPF:
             <input
               type="number"
-              name="CPF"
+              name="cpf"
               value={ cpf }
               onChange={ ({ target }) => this.setState({cpf: target.value})}
             />
           </label>
-          <label>
+          <label htmlFor="salary">
             SALÁRIO BRUTO:
             <input 
               type="number"
-              name="salario"
-              value={ salario }
-              onChange={ ({ target }) => this.setState({salario: target.value})}
+              name="salary"
+              value={ salary }
+              onChange={ ({ target }) => this.setState({salary: target.value})}
             />
           </label>
-          <label>
+          <label htmlFor="discount">
             DESCONTO DA PREVIDÊNCIA:
             <input 
               type="number"
-              name="desconto"
-              value={ desconto }
-              onChange={ ({ target }) => this.setState({desconto: target.value})}
+              name="discount"
+              value={ discount }
+              onChange={ ({ target }) => this.setState({discount: target.value})}
             />
           </label>
-          <label>
+          <label htmlFor="dependents">
             NÚMERO DE DEPENDENTES:
             <input 
               type="number"
-              name="dependentes"
-              value={ dependentes }
-              onChange={ ({ target }) => this.setState({dependentes: target.value})}
+              name="dependents"
+              value={ dependents }
+              onChange={ ({ target }) => this.setState({dependents: target.value})}
             />
           </label>
           <Link
