@@ -49,8 +49,6 @@ class Form extends Component {
     }
     // habilita o botão se for digitado algo no input name
     if (this.state.name.length !== prevState.name.length) {
-      console.log(this.state.name.length)
-      console.log(prevState.name.length)
       this.setState({isDisable: false})
     }
   };
@@ -99,6 +97,7 @@ class Form extends Component {
             NOME:
             <input
               type="text"
+              id="name"
               name="name"
               value={ name }
               required="required"
@@ -108,7 +107,8 @@ class Form extends Component {
           <label htmlFor="cpf">
             CPF:
             <input
-              type="number"
+              type="text"
+              id="cpf"
               name="cpf"
               value={ cpf }
               required="required"
@@ -119,6 +119,7 @@ class Form extends Component {
             SALÁRIO BRUTO:
             <input 
               type="number"
+              id="salary"
               name="salary"
               value={ salary }
               onChange={ ({ target }) => this.setState({salary: target.value})}
@@ -128,6 +129,7 @@ class Form extends Component {
             DESCONTO DA PREVIDÊNCIA:
             <input 
               type="number"
+              id="discount"
               name="discount"
               value={ discount }
               onChange={ ({ target }) => this.setState({discount: target.value})}
@@ -137,6 +139,7 @@ class Form extends Component {
             NÚMERO DE DEPENDENTES:
             <input 
               type="number"
+              id="dependents"
               name="dependents"
               value={ dependents }
               onChange={ ({ target }) => this.setState({dependents: target.value})}

@@ -5,7 +5,7 @@ import Login from '../pages/login'
 
 describe('Login page', () => {
   test('check if the document has two entries - an email and a password', () => {
-    const { getByLabelText } =   renderWithRouter(<Login />);
+    const { getByLabelText } = renderWithRouter(<Login />);
 
     const inputEmail = getByLabelText(/email/i);
     expect(inputEmail).toBeInTheDocument();
@@ -15,7 +15,7 @@ describe('Login page', () => {
   });
 
   test('it is possible to write in the input', () => {
-    const { getByLabelText } =   renderWithRouter(<Login />);
+    const { getByLabelText } = renderWithRouter(<Login />);
 
     const inputEmail = getByLabelText(/email/i);
     const inputPassword = getByLabelText(/senha/i);
@@ -31,7 +31,7 @@ describe('Login page', () => {
   });
 
   test('checks if the Login button exists', () => {
-    const { getByText } =   renderWithRouter(<Login />);
+    const { getByText } = renderWithRouter(<Login />);
 
     const button = getByText(/login/i);
 
@@ -40,7 +40,7 @@ describe('Login page', () => {
   });
 
   test('checks if the login button is function', () => {
-    const { getByText, getByLabelText, history } =   renderWithRouter(<Login />);
+    const { getByText, getByLabelText, history } = renderWithRouter(<Login />);
 
     const button = getByText(/login/i);
     const inputEmail = getByLabelText(/email/i);
