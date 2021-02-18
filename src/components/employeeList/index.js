@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteAction, updateAction, separeteEmployeeEditAction } from '../../redux/actions'
+import './index.css'
 
 class EmployeeList extends Component {
   constructor(props){
@@ -12,12 +13,7 @@ class EmployeeList extends Component {
     this.updateStatus = this.updateStatus.bind(this);
     this.removeEmployee = this.removeEmployee.bind(this);
   }
-  // componentDidUpdate() {
-  //   this.altera()
-  // }
-  // altera() {
-  //   const { employees } = this.props
-  // }
+
   removeEmployee(name) {
     const { deleteAction: deleteEmployee } = this.props;
     deleteEmployee(name);
@@ -35,161 +31,165 @@ class EmployeeList extends Component {
   render() {
     const { employees } = this.props
     return(
-     <table>
-       <thead>
-         <tr>
-           <th>Nome</th>
-           <th>CPF</th>
-           <th>Salário</th>
-           <th>Desconto</th>
-           <th>Dependentes</th>
-           <th>Desconto IRRF</th>
-         </tr>
-       </thead>
-       <tbody>
-         { employees.map(({
-           nome,
-           cpf,
-           salario,
-           desconto,
-           dependentes,
-           id,
-         }) => {
-          const deduçãoDependente = 164.56;
-           if (salario <= 1903.98) {
-            return <tr key={ id }>
-              <td>{ nome }</td>
-              <td>{ cpf }</td>
-              <td>{ salario }</td>
-              <td>{ desconto }</td>
-              <td>{ dependentes }</td>
-              <td>ISENTO</td>
-              <Link
-                to="/registrar-funcionario"
-                onClick={ () => this.updateStatus(id) }
-              >
-                <button>
-                  EDITAR
-                </button>
-              </Link>
-              <button
-                type="button"
-                onClick={ () => this.removeEmployee(id) }
-              >
-                EXCLUIR
-              </button>
-            </tr>
-           } 
-          else if (salario >= 1903.99 && salario <= 2826.65) {
-            const descontoDependentes = deduçãoDependente * dependentes;
-            const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
-            const descontoIRRF = (salarioBase * 0.075) - 142.80
-            return <tr key={ id }>
-              <td>{ nome }</td>
-              <td>{ cpf }</td>
-              <td>{ salario }</td>
-              <td>{ desconto }</td>
-              <td>{ dependentes }</td>
-              <td>{ descontoIRRF.toFixed(2) }</td>
-              <Link
-                to="/registrar-funcionario"
-                onClick={ () => this.updateStatus(id) }
-              >
-                <button>
-                  EDITAR
-                </button>
-              </Link>
-              <button
-                type="button"
-                onClick={ () => this.removeEmployee(id) }
-              >
-                EXCLUIR
-              </button>
-            </tr>
-          }
-          else if (salario >= 2826.66 && salario <= 3751.05) {
-            const descontoDependentes = deduçãoDependente * dependentes;
-            const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
-            const descontoIRRF = parseFloat((salarioBase * 0.15)) - 354.80
-            return <tr key={ id }>
-              <td>{ nome }</td>
-              <td>{ cpf }</td>
-              <td>{ salario }</td>
-              <td>{ desconto }</td>
-              <td>{ dependentes }</td>
-              <td>{ descontoIRRF.toFixed(2) }</td>
-              <Link
-                to="/registrar-funcionario"
-                onClick={ () => this.updateStatus(id) }
-              >
-                <button>
-                  EDITAR
-                </button>
-              </Link>
-              <button
-                type="button"
-                onClick={ () => this.removeEmployee(id) }
-              >
-                EXCLUIR
-              </button>
-            </tr>
-          }
-          else if (salario >= 3751.06 && salario <= 4664.68) {
-            const descontoDependentes = deduçãoDependente * dependentes;
-            const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
-            const descontoIRRF = parseFloat((salarioBase * 0.225)) - 636.13
-            return <tr key={ id }>
-              <td>{ nome }</td>
-              <td>{ cpf }</td>
-              <td>{ salario }</td>
-              <td>{ desconto }</td>
-              <td>{ dependentes }</td>
-              <td>{ descontoIRRF.toFixed(2) }</td>
-              <Link
-                to="/registrar-funcionario"
-                onClick={ () => this.updateStatus(id) }
-              >
-                <button>
-                  EDITAR
-                </button>
-              </Link>
-              <button
-                type="button"
-                onClick={ () => this.removeEmployee(id) }
-              >
-                EXCLUIR
-              </button>
-            </tr>
-          } else {
-            const descontoDependentes = deduçãoDependente * dependentes;
-            const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
-            const descontoIRRF = parseFloat((salarioBase * 0.275)) - 869.36
-            return <tr key={ id }>
-              <td>{ nome }</td>
-              <td>{ cpf }</td>
-              <td>{ salario }</td>
-              <td>{ desconto }</td>
-              <td>{ dependentes }</td>
-              <td>{ descontoIRRF.toFixed(2) }</td>
-              <Link
-                to="/registrar-funcionario"
-                onClick={ () => this.updateStatus(id) }
-              >
-                <button>
-                  EDITAR
-                </button>
-              </Link>
-              <button
-                type="button"
-                onClick={ () => this.removeEmployee(id) }
-              >
-                EXCLUIR
-              </button>
-            </tr>
-          }
-           }) }
-       </tbody>
-     </table>
+      <div className="employees__container">
+        <div className="employees__content">
+            <table className="employees__table">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>CPF</th>
+                  <th>Salário</th>
+                  <th>Desconto</th>
+                  <th>Dependentes</th>
+                  <th>Desconto IRRF</th>
+                </tr>
+              </thead>
+              <tbody>
+                { employees.map(({
+                  nome,
+                  cpf,
+                  salario,
+                  desconto,
+                  dependentes,
+                  id,
+                }) => {
+                const deduçãoDependente = 164.56;
+                  if (salario <= 1903.98) {
+                  return <tr key={ id }>
+                    <td>{ nome }</td>
+                    <td>{ cpf }</td>
+                    <td>{ salario }</td>
+                    <td>{ desconto }</td>
+                    <td>{ dependentes }</td>
+                    <td>ISENTO</td>
+                    <Link
+                      to="/registrar-funcionario"
+                      onClick={ () => this.updateStatus(id) }
+                    >
+                      <button>
+                        EDITAR
+                      </button>
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={ () => this.removeEmployee(id) }
+                    >
+                      EXCLUIR
+                    </button>
+                  </tr>
+                  } 
+                else if (salario >= 1903.99 && salario <= 2826.65) {
+                  const descontoDependentes = deduçãoDependente * dependentes;
+                  const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
+                  const descontoIRRF = (salarioBase * 0.075) - 142.80
+                  return <tr key={ id }>
+                    <td>{ nome }</td>
+                    <td>{ cpf }</td>
+                    <td>{ salario }</td>
+                    <td>{ desconto }</td>
+                    <td>{ dependentes }</td>
+                    <td>{ descontoIRRF.toFixed(2) }</td>
+                    <Link
+                      to="/registrar-funcionario"
+                      onClick={ () => this.updateStatus(id) }
+                    >
+                      <button>
+                        EDITAR
+                      </button>
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={ () => this.removeEmployee(id) }
+                    >
+                      EXCLUIR
+                    </button>
+                  </tr>
+                }
+                else if (salario >= 2826.66 && salario <= 3751.05) {
+                  const descontoDependentes = deduçãoDependente * dependentes;
+                  const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
+                  const descontoIRRF = parseFloat((salarioBase * 0.15)) - 354.80
+                  return <tr key={ id }>
+                    <td>{ nome }</td>
+                    <td>{ cpf }</td>
+                    <td>{ salario }</td>
+                    <td>{ desconto }</td>
+                    <td>{ dependentes }</td>
+                    <td>{ descontoIRRF.toFixed(2) }</td>
+                    <Link
+                      to="/registrar-funcionario"
+                      onClick={ () => this.updateStatus(id) }
+                    >
+                      <button>
+                        EDITAR
+                      </button>
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={ () => this.removeEmployee(id) }
+                    >
+                      EXCLUIR
+                    </button>
+                  </tr>
+                }
+                else if (salario >= 3751.06 && salario <= 4664.68) {
+                  const descontoDependentes = deduçãoDependente * dependentes;
+                  const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
+                  const descontoIRRF = parseFloat((salarioBase * 0.225)) - 636.13
+                  return <tr key={ id }>
+                    <td>{ nome }</td>
+                    <td>{ cpf }</td>
+                    <td>{ salario }</td>
+                    <td>{ desconto }</td>
+                    <td>{ dependentes }</td>
+                    <td>{ descontoIRRF.toFixed(2) }</td>
+                    <Link
+                      to="/registrar-funcionario"
+                      onClick={ () => this.updateStatus(id) }
+                    >
+                      <button>
+                        EDITAR
+                      </button>
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={ () => this.removeEmployee(id) }
+                    >
+                      EXCLUIR
+                    </button>
+                  </tr>
+                } else {
+                  const descontoDependentes = deduçãoDependente * dependentes;
+                  const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
+                  const descontoIRRF = parseFloat((salarioBase * 0.275)) - 869.36
+                  return <tr key={ id }>
+                    <td>{ nome }</td>
+                    <td>{ cpf }</td>
+                    <td>{ salario }</td>
+                    <td>{ desconto }</td>
+                    <td>{ dependentes }</td>
+                    <td>{ descontoIRRF.toFixed(2) }</td>
+                    <Link
+                      to="/registrar-funcionario"
+                      onClick={ () => this.updateStatus(id) }
+                    >
+                      <button>
+                        EDITAR
+                      </button>
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={ () => this.removeEmployee(id) }
+                    >
+                      EXCLUIR
+                    </button>
+                  </tr>
+                }
+                  }) }
+              </tbody>
+            </table>
+        </div>
+      </div>
     )
   }
 }

@@ -1,0 +1,44 @@
+.employees__container {
+  background: rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  padding: 15px 30px;
+  width: 100%;
+}
+
+.employees__content {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 30px;
+}
+
+.employees__table {
+  border-collapse: collapse;
+  margin: 10px 0;
+}
+
+.employees__table th {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.employees__table th, .employees__table td {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  text-align: center;
+}
+
+.employees__table button {
+  background: #165785;
+  border: 0;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  height: 36px;
+  padding: 8px;
+  margin-left: 5px;
+}
