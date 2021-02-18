@@ -46,21 +46,21 @@ class EmployeeList extends Component {
               </thead>
               <tbody>
                 { employees.map(({
-                  nome,
+                  name,
                   cpf,
-                  salario,
-                  desconto,
-                  dependentes,
+                  salary,
+                  discount,
+                  dependents,
                   id,
                 }) => {
-                const deduçãoDependente = 164.56;
-                  if (salario <= 1903.98) {
+                const dependentDeduction = 164.56;
+                  if (salary <= 1903.98) {
                   return <tr key={ id }>
-                    <td>{ nome }</td>
+                    <td>{ name }</td>
                     <td>{ cpf }</td>
-                    <td>{ salario }</td>
-                    <td>{ desconto }</td>
-                    <td>{ dependentes }</td>
+                    <td>{ salary }</td>
+                    <td>{ discount }</td>
+                    <td>{ dependents }</td>
                     <td>ISENTO</td>
                     <Link
                       to="/registrar-funcionario"
@@ -78,17 +78,17 @@ class EmployeeList extends Component {
                     </button>
                   </tr>
                   } 
-                else if (salario >= 1903.99 && salario <= 2826.65) {
-                  const descontoDependentes = deduçãoDependente * dependentes;
-                  const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
-                  const descontoIRRF = (salarioBase * 0.075) - 142.80
+                else if (salary >= 1903.99 && salary <= 2826.65) {
+                  const discountDependents = dependentDeduction * dependents;
+                  const salaryBase = salary - (parseFloat(discount) + parseFloat(discountDependents));
+                  const discountIRRF = (salaryBase * 0.075) - 142.80
                   return <tr key={ id }>
-                    <td>{ nome }</td>
+                    <td>{ name }</td>
                     <td>{ cpf }</td>
-                    <td>{ salario }</td>
-                    <td>{ desconto }</td>
-                    <td>{ dependentes }</td>
-                    <td>{ descontoIRRF.toFixed(2) }</td>
+                    <td>{ salary }</td>
+                    <td>{ discount }</td>
+                    <td>{ dependents }</td>
+                    <td>{ discountIRRF.toFixed(2) }</td>
                     <Link
                       to="/registrar-funcionario"
                       onClick={ () => this.updateStatus(id) }
@@ -105,17 +105,17 @@ class EmployeeList extends Component {
                     </button>
                   </tr>
                 }
-                else if (salario >= 2826.66 && salario <= 3751.05) {
-                  const descontoDependentes = deduçãoDependente * dependentes;
-                  const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
-                  const descontoIRRF = parseFloat((salarioBase * 0.15)) - 354.80
+                else if (salary >= 2826.66 && salary <= 3751.05) {
+                  const discountDependents = dependentDeduction * dependents;
+                  const salaryBase = salary - (parseFloat(discount) + parseFloat(discountDependents));
+                  const discountIRRF = parseFloat((salaryBase * 0.15)) - 354.80
                   return <tr key={ id }>
-                    <td>{ nome }</td>
+                    <td>{ name }</td>
                     <td>{ cpf }</td>
-                    <td>{ salario }</td>
-                    <td>{ desconto }</td>
-                    <td>{ dependentes }</td>
-                    <td>{ descontoIRRF.toFixed(2) }</td>
+                    <td>{ salary }</td>
+                    <td>{ discount }</td>
+                    <td>{ dependents }</td>
+                    <td>{ discountIRRF.toFixed(2) }</td>
                     <Link
                       to="/registrar-funcionario"
                       onClick={ () => this.updateStatus(id) }
@@ -132,17 +132,17 @@ class EmployeeList extends Component {
                     </button>
                   </tr>
                 }
-                else if (salario >= 3751.06 && salario <= 4664.68) {
-                  const descontoDependentes = deduçãoDependente * dependentes;
-                  const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
-                  const descontoIRRF = parseFloat((salarioBase * 0.225)) - 636.13
+                else if (salary >= 3751.06 && salary <= 4664.68) {
+                  const discountDependents = dependentDeduction * dependents;
+                  const salaryBase = salary - (parseFloat(discount) + parseFloat(discountDependents));
+                  const discountIRRF = parseFloat((salaryBase * 0.225)) - 636.13
                   return <tr key={ id }>
-                    <td>{ nome }</td>
+                    <td>{ name }</td>
                     <td>{ cpf }</td>
-                    <td>{ salario }</td>
-                    <td>{ desconto }</td>
-                    <td>{ dependentes }</td>
-                    <td>{ descontoIRRF.toFixed(2) }</td>
+                    <td>{ salary }</td>
+                    <td>{ discount }</td>
+                    <td>{ dependents }</td>
+                    <td>{ discountIRRF.toFixed(2) }</td>
                     <Link
                       to="/registrar-funcionario"
                       onClick={ () => this.updateStatus(id) }
@@ -159,16 +159,16 @@ class EmployeeList extends Component {
                     </button>
                   </tr>
                 } else {
-                  const descontoDependentes = deduçãoDependente * dependentes;
-                  const salarioBase = salario - (parseFloat(desconto) + parseFloat(descontoDependentes));
-                  const descontoIRRF = parseFloat((salarioBase * 0.275)) - 869.36
+                  const discountDependents = dependentDeduction * dependents;
+                  const salaryBase = salary - (parseFloat(discount) + parseFloat(discountDependents));
+                  const discountIRRF = parseFloat((salaryBase * 0.275)) - 869.36
                   return <tr key={ id }>
-                    <td>{ nome }</td>
+                    <td>{ name }</td>
                     <td>{ cpf }</td>
-                    <td>{ salario }</td>
-                    <td>{ desconto }</td>
-                    <td>{ dependentes }</td>
-                    <td>{ descontoIRRF.toFixed(2) }</td>
+                    <td>{ salary }</td>
+                    <td>{ discount }</td>
+                    <td>{ dependents }</td>
+                    <td>{ discountIRRF.toFixed(2) }</td>
                     <Link
                       to="/registrar-funcionario"
                       onClick={ () => this.updateStatus(id) }
