@@ -1,6 +1,6 @@
 # Teste-Tecnico-Pratico-Seidor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Teste técnico prático da empresa Seidor, desenvolvido por Diego Fernandes Affonso.
 
 ## Available Scripts
 
