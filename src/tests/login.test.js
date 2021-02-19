@@ -60,4 +60,4 @@ describe('Login page', () => {
     expect(pathname).toBe('/registrar-funcionario')
 
   })
-})
+});
